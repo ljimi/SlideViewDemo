@@ -2,7 +2,7 @@
 //  ViewController.m
 //  SlideViewDemo
 //
-//  Created by 孙春磊 on 2016/10/27.
+//  Created by sunror on 2016/10/27.
 //  Copyright © 2016年 mxl. All rights reserved.
 //
 
@@ -16,6 +16,7 @@ static NSString *imageiocn = @"9d4636a301cbcdfa18125dcf88c1da6f";
 @property (nonatomic, weak) UIButton *btnn;
 
 @end
+
 
 @implementation ViewController
 
@@ -40,35 +41,21 @@ static NSString *imageiocn = @"9d4636a301cbcdfa18125dcf88c1da6f";
     btn.layer.cornerRadius = btn.frame.size.height/2;
     [main addSubview:btn];
     _btnn = btn;
-//    [_mainView addObserver:self forKeyPath:@"x" options:NSKeyValueObservingOptionNew context:nil];
+
 }
-//-(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context{
-////    if (self.mainView.frame.origin.x!=0) {
-////        _isDraging = YES;
-////    }else{
-////        _isDraging = NO;
-////    }
-////    
-//}
-//-(void)dealloc{
-//    [_mainView removeObserver:self forKeyPath:@"x"];
-//}
-- (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
-{
+
+- (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event{
     UITouch *touch = [touches anyObject];
     CGPoint curP = [touch locationInView:self.view];
     CGPoint preP = [touch previousLocationInView:self.view];
     CGFloat offsetX = curP.x - preP.x;
-    
     _mainView.frame = [self frameWithOffsetX:offsetX];
     CGRect frame = _btnn.frame;
     frame.origin.x -=offsetX/2 ;
     _btnn.frame = frame;
-    
 }
 
-- (CGRect)frameWithOffsetX:(CGFloat)offsetX
-{
+- (CGRect)frameWithOffsetX:(CGFloat)offsetX{
     CGFloat screenH = [UIScreen mainScreen].bounds.size.height;
     CGFloat screenW = [UIScreen mainScreen].bounds.size.width;
     CGRect frame = _mainView.frame;
@@ -78,6 +65,7 @@ static NSString *imageiocn = @"9d4636a301cbcdfa18125dcf88c1da6f";
     frame.origin.y = 0;
     return frame;
 }
+
 #define RigthX 220
 #define LeftX -220
 -(void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
@@ -102,19 +90,15 @@ static NSString *imageiocn = @"9d4636a301cbcdfa18125dcf88c1da6f";
             CGRect frame = _btnn.frame;
             frame.origin.x = screenW-60;
             _btnn.frame = frame;
-            }}
+            }
             
-    else{
-            _mainView.frame = self.view.bounds;
+        }else{
+           _mainView.frame = self.view.bounds;
            CGRect frame = _btnn.frame;
            frame.origin.x = screenW * 0.5 -_btnn.frame.size.width/2;
-            _btnn.frame = frame;
-            }
+          _btnn.frame = frame;
+        }
     }];
-}
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 
